@@ -268,9 +268,28 @@ snippet query
 
 	while ($row = mysql_fetch_assoc($ret)) {
 	}
+	mysql_free_result($ret);
 
 snippet SELECT
 	SELECT
 		*
 	FROM
 		${0}
+
+snippet pre
+	echo '<pre>';
+	${0}
+	echo '</pre>';
+
+snippet ip
+	if ($_SERVER['REMOTE_ADDR'] == 'xxx.xxx.xxx') {
+		${0}
+	}
+
+snippet IP
+	if ($_SERVER['REMOTE_ADDR'] != 'xxx.xxx.xxx') {
+		${0}
+	}
+
+snippet header
+	header('Location: /');
