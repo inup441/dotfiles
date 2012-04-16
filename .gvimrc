@@ -31,7 +31,6 @@ endif
 highlight Notes cterm=underline ctermfg=lightblue guibg=DarkMagenta
 autocmd BufNewFile,BufRead * match Notes /NOTE:/
 
-
 if has('gui_macvim')
 	nnoremap <Space>fu :<C-u>setlocal fu! fu?<CR>
 	set antialias
@@ -64,8 +63,15 @@ if has('gui_macvim')
 		autocmd FocusLost * set transparency=50
 	augroup END
 elseif has('win32') || has('win64')
-	set encoding=cp932
-	set guifont=ProggyCleanTTSZBP:h12
+	set linespace=3       " 行間の幅のピクセル数
+	set columns=88
+	set lines=50
+
+	" set guifont=Inconsolata:h10
+	" set guifont=Consolas:h10
+	set guifont=Envy\ Code\ R\ for\ Powerline:h10
+	" set guifont=Dejavu_Sans_Mono_for_Powerline:h9
+	set guifontwide=Migu\ 2M:h9
 	nnoremap <Space>fu :call ToggleFullScreen()<CR>
 	function! ToggleFullScreen()
 		if &guioptions =~# 'C'
