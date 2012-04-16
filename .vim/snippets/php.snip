@@ -264,32 +264,47 @@ snippet query
 		${0}
 	";
 	$ret = mysql_query($query)
-		or die('<br /><font color="red">'.mysql_error()."</font><br />{$query}");
-
+		or die('<br /><font color="red">'.mysql_error()."<br />$query</font>");
+	
 	while ($row = mysql_fetch_assoc($ret)) {
 	}
 	mysql_free_result($ret);
 
-snippet SELECT
-	SELECT
-		*
-	FROM
-		${0}
-
-snippet pre
-	echo '<pre>';
-	${0}
-	echo '</pre>';
-
 snippet ip
-	if ($_SERVER['REMOTE_ADDR'] == 'xxx.xxx.xxx') {
+	if ($_SERVER["REMOTE_ADDR"] == 'xx.xx.xxx.xxx') {
 		${0}
 	}
 
 snippet IP
-	if ($_SERVER['REMOTE_ADDR'] != 'xxx.xxx.xxx') {
+	if ($_SERVER["REMOTE_ADDR"] != 'xx.xx.xxx.xxx') {
 		${0}
 	}
 
+snippet error
+	error_reporting(E_ALL);
+
+snippet errorn
+  error_reporting(E_ALL ^ E_NOTICE);
+
+snippet pre
+  echo '<pre>';
+  ${0}
+  echo '</pre>';
+
 snippet header
 	header('Location: /');
+
+snippet nofollow
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <meta name="googlebot" content="noindex, nofollow" />
+
+snippet ->
+  function ${0} {
+    ${4:// code...}
+  }
+
+snippet headeru
+  header('Content-Type: text/html; charset=UTF-8');
+
+snippet hr
+  echo '<hr />';
