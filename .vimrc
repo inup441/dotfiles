@@ -28,7 +28,7 @@ NeoBundle 'Shougo/neobundle.vim'
 " My Bundles here:
 "
 " original repos on github
-" NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-fugitive'
 " NeoBundle 'choplin/unite-vim_hacks'
 " NeoBundle 'godlygeek/tabular'
 " NeoBundle 'mattn/learn-vimscript'
@@ -79,6 +79,7 @@ NeoBundle 'gmarik/ingretu'
 NeoBundle 'noahfrederick/Hemisu'
 NeoBundle 'veloce/vim-aldmeris'
 NeoBundle 'yuroyoro/yuroyoro256.vim'
+NeoBundle 'git://gist.github.com/187578.git'
 
 " Syntax
 NeoBundle 'jQuery'
@@ -135,6 +136,9 @@ if exists('&colorcolumn')
 	autocmd FileType sh,php,perl,vim,ruby,python,javascript,coffee setlocal textwidth=80
 endif
 
+" バッファを閉じる時にバッファリストから削除
+autocmd BufReadPre * setlocal bufhidden=delete
+
 "-----------------------------------------------------------------------------
 " システム設定
 "-----------------------------------------------------------------------------
@@ -161,7 +165,7 @@ set cmdheight=1                                   " コマンドラインの高�
 set display+=lastline                              " 画面最後の行をできる限り表示する
 set display+=uhex                                  " 印字不可能文字を16進数で表示
 set shortmess+=I                                  " スプラッシュ(起動時のメッセージ)を表示しない
-set t_co=256
+set t_Co=256
 
 set showmatch matchtime=5                        " 括弧の対応表示時間
 
@@ -309,6 +313,7 @@ nnoremap : ;
 nnoremap ; :
 vnoremap : ;
 vnoremap ; :
+map <silent> <ESC> <ESC>:set iminsert=0<CR>
 
 if has('kaoriya')
 	nnoremap / g/
@@ -587,13 +592,13 @@ let g:syntastic_javascript_jslint_conf = "--undef --nomen --regexp --plusplus --
 " tpope/vim-fugitive
 "-------------------------------------------------------------------------------
 " for Fugitive {{{
-" nnoremap <Space>gd :<C-u>Gdiff<Enter>
-" nnoremap <Space>gs :<C-u>Gstatus<Enter>
-" nnoremap <Space>gl :<C-u>Glog<Enter>
-" nnoremap <Space>ga :<C-u>Gwrite<Enter>
-" nnoremap <Space>gc :<C-u>Gcommit<Enter>
-" nnoremap <Space>gC :<C-u>Git commit --amend<Enter>
-" nnoremap <Space>gb :<C-u>Gblame<Enter>
+nnoremap <Space>gd :<C-u>Gdiff<Enter>
+nnoremap <Space>gs :<C-u>Gstatus<Enter>
+nnoremap <Space>gl :<C-u>Glog<Enter>
+nnoremap <Space>ga :<C-u>Gwrite<Enter>
+nnoremap <Space>gc :<C-u>Gcommit<Enter>
+nnoremap <Space>gC :<C-u>Git commit --amend<Enter>
+nnoremap <Space>gb :<C-u>Gblame<Enter>
 " }}}
 "
 "-------------------------------------------------------------------------------
@@ -738,11 +743,12 @@ nnoremap <silent> <Space>ug :<C-u>Unite -no-quit -auto-preview grep<CR>
 nnoremap <silent> <Space>uh :<C-u>Unite help<CR>
 nnoremap <silent> <Space>uk :<C-u>Unite -buffer-name=files bookmark file<CR>
 nnoremap <silent> <Space>um :<C-u>Unite -buffer-name=files file_mru directory_mru file<CR>
+nnoremap <silent> <Space>uo :<C-u>Unite outline<CR>
 nnoremap <silent> <Space>uq :<C-u>Unite -auto-preview qf<CR>
 " nnoremap <silent> <Space>ur :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> <Space>ut :<C-u>Unite tab<CR>
 nnoremap <silent> <Space>us :<C-u>Unite source<CR>
-nnoremap <silent> <Space>uu :<C-u>Unite -buffer-name=files buffer file_mru bookmark file<CR>
+nnoremap <silent> <Space>uu :<C-u>Unite -buffer-name=files buffer tab file_mru bookmark file<CR>
 nnoremap <silent> <Space>uv :<C-u>Unite vimeshell/history<CR>
 nnoremap <silent> <Space>ll :<C-u>Unite menu:shortcut<CR>
 
@@ -973,8 +979,8 @@ let g:Powerline_symbols = 'fancy'
 "===============================================================================
 autocmd FileType javascript
   \ :setl omnifunc=jscomplete#CompleteJS
-let g:jscomplete_use = ['dom']
-" dom.vim : DOM 系の補完リストを追加するよ
+let g:jscomplete_use = ['dom', 'moz']
+" => autoload/js/dom.vim と autoload/js/moz.vim が読まれる
 
 "===============================================================================
 " test
@@ -1017,5 +1023,27 @@ endif
 " vimperator
 au! BufNewFile,BufRead *.vimp setl ft=vimperator
 
+augroup php
+	autocmd! php
+	" autocmd FileType php let php_sql_query=1
+	autocmd FileType php let php_noShortTags=1
+	autocmd FileType php let php_asp_tags=1
+	" autocmd FileType php let php_folding=1
+	autocmd FileType php let php_htmlInStrings=1
+	autocmd FileType php inoremap <C-d> <ESC>:call PhpDocSingle()<CR>i 
+	autocmd FileType php nnoremap <C-d> :call PhpDocSingle()<CR> 
+	autocmd FileType php vnoremap <C-d> :call PhpDocRange()<CR> 
+	" autocmd Syntax php set foldmethod=syntax
+augroup END
+
+augroup smarty
+	autocmd! smarty
+	autocmd FileType smarty setlocal expandtab
+augroup END
 " *.coffee を保存するとコンパイル
 " autocmd BufWritePost *.coffee silent CoffeeMake! -cb | cwindow
+"
+
+augroup markdown
+	autocmd BufNewFile *.md set filetype=markdown
+augroup END
