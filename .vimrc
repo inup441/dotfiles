@@ -173,12 +173,12 @@ set showmatch matchtime=5                        " 括弧の対応表示時間
 set autoindent                                    " 自動的にインデントする
 set smartindent
 set list                                          " 不可視文字表示
-if (has('win32'))
-	set listchars=tab:>-,trail:-,eol:<,nbsp:%,extends:>,precedes:<                            " 不可視文字の表示形式
-else 
-" 	set listchars=tab:▸-,eol:↲,extends:»,precedes:«,nbsp:%
+if (has('mac'))
 	set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
-" set listchars=tab:▸-,eol:¬,extends:»,precedes:«,nbsp:%
+" 	set listchars=tab:▸-,eol:↲,extends:»,precedes:«,nbsp:%
+" 	set listchars=tab:▸-,eol:¬,extends:»,precedes:«,nbsp:%
+els
+	set listchars=tab:>-,trail:-,eol:<,nbsp:%,extends:>,precedes:<                            " 不可視文字の表示形式
 endif
 set lazyredraw                                    " コマンド実行中は再描画しない
 set noerrorbells                                  " エラー時の音とビジュアルベルの抑制(gvimは.gvimrcで設定)
