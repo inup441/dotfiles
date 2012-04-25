@@ -343,7 +343,7 @@ nnoremap * :<C-u>set hlsearch<CR>*
 nnoremap # :<C-u>set hlsearch<CR>#
 
 nnoremap vv <C-v>
-nnoremap -- :<C-u>e %:h<CR>
+nnoremap -- :<C-u>VimFilerBufferDir<CR>
 nnoremap - :<C-u>e %:h/
 nnoremap <C-l> :<C-u>e %<CR>
 
