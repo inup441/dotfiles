@@ -1046,5 +1046,5 @@ augroup END
 "
 
 augroup markdown
-	autocmd BufNewFile *.md set filetype=markdown
+	autocmd BufNewFile,BufRead *.md set filetype=markdown
 augroup END
