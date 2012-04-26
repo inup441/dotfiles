@@ -157,8 +157,7 @@ set hlsearch   " 検索文字の強調表示
 "-------------------------------------------------------------------------------
 " 表示 Apperance
 "-------------------------------------------------------------------------------
-" let g:solarized_termcolors=256
-
+colorscheme aldmeris
 set ambiwidth=double                              " □や○の文字があってもカーソル位置がずれないようにする
 set background=dark
 set cinoptions+=:0                                " Cインデントの設定
