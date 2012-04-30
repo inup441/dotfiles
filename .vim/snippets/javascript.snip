@@ -45,3 +45,15 @@ snippet key
 
 snippet timeout
     setTimeout(function() {${0}}${2:}, ${1:10});
+
+snippet ajax
+    $.ajax({
+      url: ${0},
+      data: ${1},
+      dataType: ${2},
+      success: function() {
+        ${3}
+      },
+      error: function() {
+      }
+    })
