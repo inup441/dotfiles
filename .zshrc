@@ -1,65 +1,65 @@
-# ¥Ò¥¹¥È¥ê¤ÎÀßÄê
+# ãƒ’ã‚¹ãƒˆãƒªã®è¨­å®š
 export HISTFILE=$HOME/.zsh_history
 export HISTSIZE=10000
 export SAVEHIST=10000
 
 export LESSCHARSET=utf-8
 
-# ¶¯ÎÏ¤ÊÊä´°¤òÍ­¸ú¤Ë¤¹¤ë
+# å¼·åŠ›ãªè£œå®Œã‚’æœ‰åŠ¹ã«ã™ã‚‹
 autoload -Uz compinit
 compinit
 
-## ¥×¥í¥ó¥×¥È¤ÎÀßÄê
+## ãƒ—ãƒ­ãƒ³ãƒ—ãƒˆã®è¨­å®š
 autoload colors
 colors
 
-limit coredumpsize 102400 # ¥³¥¢¥À¥ó¥×¥µ¥¤¥º¤òÀ©¸Â
+limit coredumpsize 102400 # ã‚³ã‚¢ãƒ€ãƒ³ãƒ—ã‚µã‚¤ã‚ºã‚’åˆ¶é™
 
-# Êä´°¸õÊä¤Î¿§¤Å¤±
-# eval `dircolors`
+# è£œå®Œå€™è£œã®è‰²ã¥ã‘
+eval `dircolors`
 export ZLS_COLORS=$LS_COLORS
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-# Êä´°¸õÊä¤Î¥«¡¼¥½¥ëÁªÂò¤òÍ­¸ú¤Ë
+# è£œå®Œå€™è£œã®ã‚«ãƒ¼ã‚½ãƒ«é¸æŠã‚’æœ‰åŠ¹ã«
 zstyle ':completion:*:default' menu select=1
-# Êä´°»ş¤ËÂçÊ¸»ú¤È¾®Ê¸»ú¤ò¶èÊÌ¤·¤Ê¤¤
+# è£œå®Œæ™‚ã«å¤§æ–‡å­—ã¨å°æ–‡å­—ã‚’åŒºåˆ¥ã—ãªã„
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 #-------------------------------------------------------------------------------
 # setopt
 #-------------------------------------------------------------------------------
-setopt auto_cd              # ¥Ç¥£¥ì¥¯¥È¥êÌ¾¤À¤±¤Ç cd
-setopt auto_list            # Êä´°¸õÊä¤ò°ìÍ÷É½¼¨
-setopt auto_menu            # TAB ¤Ç½ç¤ËÊä´°¸õÊä¤òÀÚ¤êÂØ¤¨¤ë
-setopt auto_param_keys      # ¥«¥Ã¥³¤ÎÂĞ±ş¤Ê¤É¤ò¼«Æ°Åª¤ËÊä´°
-setopt auto_param_slash     # ¥Ç¥£¥ì¥¯¥È¥êÌ¾¤ÎÊä´°¤ÇËöÈø¤Î / ¤ò¼«Æ°Åª¤ËÉÕ²Ã¤·¡¢¼¡¤ÎÊä´°¤ËÈ÷¤¨¤ë
-setopt auto_pushd           # cd »ş¤Ë¼«Æ°¤Ç push
-setopt auto_resume          # ¥µ¥¹¥Ú¥ó¥ÉÃæ¤Î¥×¥í¥»¥¹¤ÈÆ±¤¸¥³¥Ş¥ó¥ÉÌ¾¤ò¼Â¹Ô¤·¤¿¾ì¹ç¤Ï¥ê¥¸¥å¡¼¥à
-setopt brace_ccl            # {a-c} ¤ò a b c ¤ËÅ¸³«¤¹¤ëµ¡Ç½¤ò»È¤¨¤ë¤è¤¦¤Ë¤¹¤ë
-setopt correct              # ¥¹¥Ú¥ë¥Á¥§¥Ã¥¯
+setopt auto_cd              # ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªåã ã‘ã§ cd
+setopt auto_list            # è£œå®Œå€™è£œã‚’ä¸€è¦§è¡¨ç¤º
+setopt auto_menu            # TAB ã§é †ã«è£œå®Œå€™è£œã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹
+setopt auto_param_keys      # ã‚«ãƒƒã‚³ã®å¯¾å¿œãªã©ã‚’è‡ªå‹•çš„ã«è£œå®Œ
+setopt auto_param_slash     # ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªåã®è£œå®Œã§æœ«å°¾ã® / ã‚’è‡ªå‹•çš„ã«ä»˜åŠ ã—ã€æ¬¡ã®è£œå®Œã«å‚™ãˆã‚‹
+setopt auto_pushd           # cd æ™‚ã«è‡ªå‹•ã§ push
+setopt auto_resume          # ã‚µã‚¹ãƒšãƒ³ãƒ‰ä¸­ã®ãƒ—ãƒ­ã‚»ã‚¹ã¨åŒã˜ã‚³ãƒãƒ³ãƒ‰åã‚’å®Ÿè¡Œã—ãŸå ´åˆã¯ãƒªã‚¸ãƒ¥ãƒ¼ãƒ 
+setopt brace_ccl            # {a-c} ã‚’ a b c ã«å±•é–‹ã™ã‚‹æ©Ÿèƒ½ã‚’ä½¿ãˆã‚‹ã‚ˆã†ã«ã™ã‚‹
+setopt correct              # ã‚¹ãƒšãƒ«ãƒã‚§ãƒƒã‚¯
 setopt complete_aliases
-setopt extended_glob        # ¥Õ¥¡¥¤¥ëÌ¾¤Ç# , ~, ^ ¤Î 3 Ê¸»ú¤òÀµµ¬É½¸½¤È¤·¤Æ°·¤¦
-setopt extended_history     # zsh ¤Î³«»Ï, ½ªÎ»»ş¹ï¤ò¥Ò¥¹¥È¥ê¥Õ¥¡¥¤¥ë¤Ë½ñ¤­¹ş¤à
-setopt equals               # =command ¤ò command ¤Î¥Ñ¥¹Ì¾¤ËÅ¸³«¤¹¤ë
-setopt hist_ignore_dups     # Ä¾Á°¤ÈÆ±¤¸¥³¥Ş¥ó¥É¤ò¥Ò¥¹¥È¥ê¤ËÄÉ²Ã¤·¤Ê¤¤
-setopt hist_ignore_space    # ¥³¥Ş¥ó¥É¥é¥¤¥ó¤ÎÀèÆ¬¤¬¥¹¥Ú¡¼¥¹¤Ç»Ï¤Ş¤ë¾ì¹ç¥Ò¥¹¥È¥ê¤ËÄÉ²Ã¤·¤Ê¤¤
-setopt hist_no_store        # history (fc -l) ¥³¥Ş¥ó¥É¤ò¥Ò¥¹¥È¥ê¥ê¥¹¥È¤«¤é¼è¤ê½ü¤¯¡£
-setopt hist_verify          # ¥Ò¥¹¥È¥ê¤ò¸Æ¤Ó½Ğ¤·¤Æ¤«¤é¼Â¹Ô¤¹¤ë´Ö¤Ë°ìÃ¶ÊÔ½¸
-setopt interactive_comments # ¥³¥Ş¥ó¥É¥é¥¤¥ó¤Ç¤â# °Ê¹ß¤ò¥³¥á¥ó¥È¤È¸«¤Ê¤¹
-setopt long_list_jobs       # ÆâÉô¥³¥Ş¥ó¥É jobs ¤Î½ĞÎÏ¤ò¥Ç¥Õ¥©¥ë¥È¤Ç jobs -l ¤Ë¤¹¤ë
-setopt list_types           # Êä´°¸õÊä°ìÍ÷¤Ç¥Õ¥¡¥¤¥ë¤Î¼ïÊÌ¤ò¥Ş¡¼¥¯É½¼¨
-setopt list_packed          # Êä´°¸õÊä¤òµÍ¤á¤ÆÉ½¼¨
-setopt mark_dirs            # ¥Õ¥¡¥¤¥ëÌ¾¤ÎÅ¸³«¤Ç¥Ç¥£¥ì¥¯¥È¥ê¤Ë¥Ş¥Ã¥Á¤·¤¿¾ì¹çËöÈø¤Ë / ¤òÉÕ²Ã¤¹¤ë
-setopt magic_equal_subst    # --prefix=/usr ¤Ê¤É¤Î = °Ê¹ß¤âÊä´°
-setopt noautoremoveslash    # ºÇ¸å¤Î¥¹¥é¥Ã¥·¥å¤ò¼«Æ°Åª¤Ëºï½ü¤·¤Ê¤¤
-setopt nobeep               # ¥Ó¡¼¥×¤òÌÄ¤é¤µ¤Ê¤¤
-setopt no_flow_control      # ¥Õ¥í¡¼¥³¥ó¥È¥í¡¼¥ë¤òÌµ¸ú¤Ë¤¹¤ë
-setopt numeric_glob_sort    # ¥Õ¥¡¥¤¥ëÌ¾¤ÎÅ¸³«¤Ç¼­½ñ½ç¤Ç¤Ï¤Ê¤¯¿ôÃÍÅª¤Ë¥½¡¼¥È
-setopt print_eight_bit      # ÆüËÜ¸ì¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¼¨²ÄÇ½¤Ë¤¹¤ë
-setopt prompt_subst         # ¿§¤ò»È¤¦
-setopt pushd_ignore_dups    # Æ±¤¸¥Ç¥£¥ì¥¯¥È¥ê¤ò pushd ¤·¤Ê¤¤
-setopt share_history        # ¥Ò¥¹¥È¥ê¤ò¶¦Í­
+setopt extended_glob        # ãƒ•ã‚¡ã‚¤ãƒ«åã§# , ~, ^ ã® 3 æ–‡å­—ã‚’æ­£è¦è¡¨ç¾ã¨ã—ã¦æ‰±ã†
+setopt extended_history     # zsh ã®é–‹å§‹, çµ‚äº†æ™‚åˆ»ã‚’ãƒ’ã‚¹ãƒˆãƒªãƒ•ã‚¡ã‚¤ãƒ«ã«æ›¸ãè¾¼ã‚€
+setopt equals               # =command ã‚’ command ã®ãƒ‘ã‚¹åã«å±•é–‹ã™ã‚‹
+setopt hist_ignore_dups     # ç›´å‰ã¨åŒã˜ã‚³ãƒãƒ³ãƒ‰ã‚’ãƒ’ã‚¹ãƒˆãƒªã«è¿½åŠ ã—ãªã„
+setopt hist_ignore_space    # ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã®å…ˆé ­ãŒã‚¹ãƒšãƒ¼ã‚¹ã§å§‹ã¾ã‚‹å ´åˆãƒ’ã‚¹ãƒˆãƒªã«è¿½åŠ ã—ãªã„
+setopt hist_no_store        # history (fc -l) ã‚³ãƒãƒ³ãƒ‰ã‚’ãƒ’ã‚¹ãƒˆãƒªãƒªã‚¹ãƒˆã‹ã‚‰å–ã‚Šé™¤ãã€‚
+setopt hist_verify          # ãƒ’ã‚¹ãƒˆãƒªã‚’å‘¼ã³å‡ºã—ã¦ã‹ã‚‰å®Ÿè¡Œã™ã‚‹é–“ã«ä¸€æ—¦ç·¨é›†
+setopt interactive_comments # ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã§ã‚‚# ä»¥é™ã‚’ã‚³ãƒ¡ãƒ³ãƒˆã¨è¦‹ãªã™
+setopt long_list_jobs       # å†…éƒ¨ã‚³ãƒãƒ³ãƒ‰ jobs ã®å‡ºåŠ›ã‚’ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ jobs -l ã«ã™ã‚‹
+setopt list_types           # è£œå®Œå€™è£œä¸€è¦§ã§ãƒ•ã‚¡ã‚¤ãƒ«ã®ç¨®åˆ¥ã‚’ãƒãƒ¼ã‚¯è¡¨ç¤º
+setopt list_packed          # è£œå®Œå€™è£œã‚’è©°ã‚ã¦è¡¨ç¤º
+setopt mark_dirs            # ãƒ•ã‚¡ã‚¤ãƒ«åã®å±•é–‹ã§ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã«ãƒãƒƒãƒã—ãŸå ´åˆæœ«å°¾ã« / ã‚’ä»˜åŠ ã™ã‚‹
+setopt magic_equal_subst    # --prefix=/usr ãªã©ã® = ä»¥é™ã‚‚è£œå®Œ
+setopt noautoremoveslash    # æœ€å¾Œã®ã‚¹ãƒ©ãƒƒã‚·ãƒ¥ã‚’è‡ªå‹•çš„ã«å‰Šé™¤ã—ãªã„
+setopt nobeep               # ãƒ“ãƒ¼ãƒ—ã‚’é³´ã‚‰ã•ãªã„
+setopt no_flow_control      # ãƒ•ãƒ­ãƒ¼ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’ç„¡åŠ¹ã«ã™ã‚‹
+setopt numeric_glob_sort    # ãƒ•ã‚¡ã‚¤ãƒ«åã®å±•é–‹ã§è¾æ›¸é †ã§ã¯ãªãæ•°å€¤çš„ã«ã‚½ãƒ¼ãƒˆ
+setopt print_eight_bit      # æ—¥æœ¬èªãƒ•ã‚¡ã‚¤ãƒ«åã‚’è¡¨ç¤ºå¯èƒ½ã«ã™ã‚‹
+setopt prompt_subst         # è‰²ã‚’ä½¿ã†
+setopt pushd_ignore_dups    # åŒã˜ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’ pushd ã—ãªã„
+setopt share_history        # ãƒ’ã‚¹ãƒˆãƒªã‚’å…±æœ‰
 
-unsetopt promptcr           # ½ĞÎÏ¤ÎÊ¸»úÎóËöÈø¤Ë²ş¹Ô¥³¡¼¥É¤¬Ìµ¤¤¾ì¹ç¤Ç¤âÉ½¼¨
+unsetopt promptcr           # å‡ºåŠ›ã®æ–‡å­—åˆ—æœ«å°¾ã«æ”¹è¡Œã‚³ãƒ¼ãƒ‰ãŒç„¡ã„å ´åˆã§ã‚‚è¡¨ç¤º
 
 
 #-------------------------------------------------------------------------------
@@ -72,26 +72,26 @@ precmd () {
   psvar[1]=$vcs_info_msg_0_
 }
 
-# º¸Â¦¤ËÉ½¼¨¤µ¤ì¤ë¤ÎÄÌ¾ï¤Î¥×¥í¥ó¥×¥È
+# å·¦å´ã«è¡¨ç¤ºã•ã‚Œã‚‹ã®é€šå¸¸ã®ãƒ—ãƒ­ãƒ³ãƒ—ãƒˆ
 PROMPT="
 [%{${fg[green]}%}%n%{${reset_color}%} @ %{${fg[green]}%}%m%{${reset_color}%}] %{${fg[magenta]}%}\$(aa)%{${reset_color}%}
 %{${fg[blue]}%}[%d]%{${reset_color}%} %1(v|%F{green}%1v%f|)
 %(!.#.$) "
 
-# 2¹Ô°Ê¾å¤Î¥³¥Ş¥ó¥É¤òÆşÎÏ¤¹¤ëºİ¤ËÉ½¼¨¤µ¤ì¤ë¥×¥í¥ó¥×¥È
+# 2è¡Œä»¥ä¸Šã®ã‚³ãƒãƒ³ãƒ‰ã‚’å…¥åŠ›ã™ã‚‹éš›ã«è¡¨ç¤ºã•ã‚Œã‚‹ãƒ—ãƒ­ãƒ³ãƒ—ãƒˆ
 PROMPT2="%{${fg[blue]}%}%_> %{${reset_color}%}"
 
-# ¥³¥Ş¥ó¥É¤òÂÇ¤Á´Ö°ã¤¨¤¿¤È¤­¤Î¡Ö¤â¤·¤«¤·¤Æ¡×¥×¥í¥ó¥×¥È
+# ã‚³ãƒãƒ³ãƒ‰ã‚’æ‰“ã¡é–“é•ãˆãŸã¨ãã®ã€Œã‚‚ã—ã‹ã—ã¦ã€ãƒ—ãƒ­ãƒ³ãƒ—ãƒˆ
 SPROMPT="%{${fg[red]}%}correct: %R -> %r [nyae]? %{${reset_color}%}"
 
-#±¦Â¦¤ËÉ½¼¨¤µ¤ì¤ë¥×¥í¥ó¥×¥È¡£ÆşÎÏ¤¬Èï¤ë¤È¼«Æ°Åª¤Ë¾Ã¤¨¤ë
+#å³å´ã«è¡¨ç¤ºã•ã‚Œã‚‹ãƒ—ãƒ­ãƒ³ãƒ—ãƒˆã€‚å…¥åŠ›ãŒè¢«ã‚‹ã¨è‡ªå‹•çš„ã«æ¶ˆãˆã‚‹
 RPROMPT="%{${fg[cyan]}%}%D{%F %a} %T%{${reset_color}%}"
 
 
 #-------------------------------------------------------------------------------
 # bindkey
 #-------------------------------------------------------------------------------
-# emacs É÷¥­¡¼¥Ğ¥¤¥ó¥É¤Ë¤¹¤ë
+# emacs é¢¨ã‚­ãƒ¼ãƒã‚¤ãƒ³ãƒ‰ã«ã™ã‚‹
 bindkey -e
 bindkey '^p' history-beginning-search-backward
 bindkey '^n' history-beginning-search-forward
@@ -100,16 +100,17 @@ bindkey '^n' history-beginning-search-forward
 #-------------------------------------------------------------------------------
 # The 'ls' family (this assumes you use a recent GNU ls)
 #-------------------------------------------------------------------------------
-alias ls='ls -G'           # add colors for filetype recognition
-alias la='ls -Al'          # show hidden files
-alias ll='ls -l'
-alias lx='ls -lXB'         # sort by extension
-alias lk='ls -lSr'         # sort by size, biggest last
-alias lc='ls -ltcr'        # sort by and show change time, most recent last
-alias lu='ls -ltur'        # sort by and show access time, most recent last
-alias lt='ls -ltr'         # sort by date, most recent last
-alias lm='ls -al |more'    # pipe through 'more'
-alias lr='ls -lR'          # recursive ls
+#
+alias ls='ls -G  --color=auto' # add colors for filetype recognition
+alias la='ls -Al'              # show hidden files
+alias ll='ls -la'
+alias lx='ls -lXB'             # sort by extension
+alias lk='ls -lSr'             # sort by size, biggest last
+alias lc='ls -ltcr'            # sort by and show change time, most recent last
+alias lu='ls -ltur'            # sort by and show access time, most recent last
+alias lt='ls -ltr'             # sort by date, most recent last
+alias lm='ls -al |more'        # pipe through 'more'
+alias lr='ls -lR'              # recursive ls
 
 alias cp='cp -iRv'
 alias mv='mv -iv'
