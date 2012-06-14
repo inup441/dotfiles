@@ -16,7 +16,7 @@ colors
 limit coredumpsize 102400 # コアダンプサイズを制限
 
 # 補完候補の色づけ
-eval `dircolors`
+# eval `dircolors`
 export ZLS_COLORS=$LS_COLORS
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # 補完候補のカーソル選択を有効に
@@ -101,7 +101,7 @@ bindkey '^n' history-beginning-search-forward
 # The 'ls' family (this assumes you use a recent GNU ls)
 #-------------------------------------------------------------------------------
 #
-alias ls='ls -G  --color=auto' # add colors for filetype recognition
+alias ls='ls -G'               # add colors for filetype recognition
 alias la='ls -Al'              # show hidden files
 alias ll='ls -la'
 alias lx='ls -lXB'             # sort by extension
@@ -122,6 +122,6 @@ alias mkdir='mkdir -p'
 #-------------------------------------------------------------------------------
 case "${OSTYPE}" in
   darwin*)
-    [-f ~/dotfiles/.zshrx.mac] && source ~/dotfiles/.zshrc.mac
+    [ -f ~/dotfiles/.zshrx.mac ] && source ~/dotfiles/.zshrc.mac
     ;;
 esac

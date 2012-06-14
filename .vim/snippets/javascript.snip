@@ -48,12 +48,13 @@ snippet timeout
 
 snippet ajax
     $.ajax({
-      url: ${0},
-      data: ${1},
-      dataType: ${2},
+      url: ${1},
+      type: ${2},
+      data: ${3},
+      dataType: ${4},
       success: function() {
-        ${3}
+        ${0}
       },
       error: function() {
       }
-    })
+    });

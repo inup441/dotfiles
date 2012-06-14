@@ -31,6 +31,19 @@ endif
 highlight Notes cterm=underline ctermfg=lightblue guibg=DarkMagenta
 autocmd BufNewFile,BufRead * match Notes /NOTE:/
 
+" Additional highlights
+augroup AdditionalHighlights
+  autocmd!
+
+  " Trailing spaces
+  autocmd ColorScheme * highlight link TrailingSpaces Error
+  autocmd Syntax * syntax match TrailingSpaces containedin=ALL /\s\+$/
+
+  " Zenkaku space
+  autocmd ColorScheme * highlight link ZenkakuSpace Error
+  autocmd Syntax * syntax match ZenkakuSpace containedin=ALL /　/
+augroup END
+
 if has('gui_macvim')
 	nnoremap <Space>fu :<C-u>setlocal fu! fu?<CR>
 	set antialias
@@ -43,9 +56,10 @@ if has('gui_macvim')
 	"フォントの設定 スペースが含まれる場合は直前にバックスラッシュ
 	" set guifont=Andale_Mono:h16
 " 	set guifont=Consolas:h14
-" 	set guifont=Consolas\ for\ Powerline:h15
+" 	set guifont=Consolas\ for\ Powerline:h14
+	set guifont=Menlo\ for\ Powerline:h14
 	" set guifont=DroidSansMonoSlashed:h12
-	set guifont=Envy\ Code\ R\ for\ Powerline:h14
+" 	set guifont=Envy\ Code\ R\ for\ Powerline:h14
 	" set guifont=Inconsolata:h14
 	" set guifont=Menlo_bold:h13
 	" set guifont=MigMix_2m_bold:h13

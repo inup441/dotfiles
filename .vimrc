@@ -1,6 +1,6 @@
 scriptencoding utf-8
 "-----------------------------------------------------------------------------
-" ユーザーランタイムパス設定
+" ユーザーランタイムパス設定 {{{
 "-----------------------------------------------------------------------------
 if isdirectory($HOME . '/.vim')
 	let $MYVIMRUNTIME = $HOME.'/.vim'
@@ -9,9 +9,10 @@ elseif isdirectory($HOME . '\vimfiles')
 elseif isdirectory($VIM . '\vimfiles')
 	let $MYVIMRUNTIME = $VIM.'\vimfiles'
 endif
+" }}}
 
 "--------------------------------------------------------------------------------
-"Shougo/neobundle
+" Shougo/neobundle {{{
 "--------------------------------------------------------------------------------
 set nocompatible               " be iMproved
 filetype off                   " required!
@@ -32,6 +33,7 @@ NeoBundle 'tpope/vim-fugitive'
 " NeoBundle 'choplin/unite-vim_hacks'
 " NeoBundle 'godlygeek/tabular'
 " NeoBundle 'mattn/learn-vimscript'
+NeoBundle 'glidenote/memolist.vim'
 NeoBundle 'h1mesuke/vim-alignta'
 NeoBundle 'kana/vim-smartchr'
 NeoBundle 'Lokaltog/vim-powerline'
@@ -52,6 +54,7 @@ NeoBundle 'tyru/restart.vim'
 NeoBundle 'ujihisa/neco-look'
 NeoBundle 'vim-jp/vimdoc-ja'
 " unite.vim
+NeoBundle 'pasela/unite-webcolorname'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'tsukkee/unite-help'
 NeoBundle 'ujihisa/unite-colorscheme'
@@ -73,7 +76,7 @@ NeoBundle 'sudo.vim'
 NeoBundle 'PDV--phpDocumentor-for-Vim'
 NeoBundle 'vim-scripts/smarty.vim'
 
-" ColorScheme
+" ColorScheme {{{
 NeoBundle 'altercation/vim-colors-solarized'
 " NeoBundle 'ChrisKempson/Vim-Tomorrow-Theme'
 NeoBundle 'gmarik/ingretu'
@@ -81,6 +84,7 @@ NeoBundle 'noahfrederick/Hemisu'
 NeoBundle 'veloce/vim-aldmeris'
 NeoBundle 'yuroyoro/yuroyoro256.vim'
 NeoBundle 'git://gist.github.com/187578.git'
+" }}}
 
 " Syntax
 NeoBundle 'jQuery'
@@ -90,9 +94,10 @@ NeoBundle 'jQuery'
 
 filetype plugin indent on     " required! 
 set nocompatible               " be iMproved
+" }}}
 
 "-------------------------------------------------------------------------------
-" 基本設定 Basics
+" 基本設定 Basics {{{
 "-------------------------------------------------------------------------------
 syntax on
 let g:mapleader=","            " キーマップリーダー
@@ -139,23 +144,26 @@ endif
 
 " バッファを閉じる時にバッファリストから削除
 autocmd BufReadPre * setlocal bufhidden=delete
+" }}}
 
 "-----------------------------------------------------------------------------
-" システム設定
+" システム設定 system {{{
 "-----------------------------------------------------------------------------
 set nrformats-=octal           " 8進数を無効にする。<C-a>,<C-x>に影響する
+" }}}
 
 "-------------------------------------------------------------------------------
-" 検索 Search
+" 検索 Search {{{
 "-------------------------------------------------------------------------------
 set ignorecase " 検索の時に大文字小文字を区別しない
 set smartcase  " ただし大文字小文字の両方が含まれている場合は大文字小文字を区別する
 set wrapscan   " 検索時にファイルの最後まで行ったら最初に戻らない
 set incsearch  " インクリメンタルサーチ
 set hlsearch   " 検索文字の強調表示
+" }}}
 
 "-------------------------------------------------------------------------------
-" 表示 Apperance
+" 表示 Apperance {{{
 "-------------------------------------------------------------------------------
 colorscheme aldmeris
 set ambiwidth=double                              " □や○の文字があってもカーソル位置がずれないようにする
@@ -209,9 +217,10 @@ augroup END
 :hi clear CursorLine
 :hi CursorLine gui=underline
 highlight CursorLine ctermbg=black guibg=black
+" }}}
 
 "-------------------------------------------------------------------------------
-" ステータスライン StatusLine
+" ステータスライン StatusLine {{{
 "-------------------------------------------------------------------------------
 set laststatus=2   " 常にステータスラインを表示
 set ruler          " カーソルが何行目の何列目に置かれているかを表示する
@@ -259,9 +268,10 @@ func! String2Hex(str)
 	endwhile
 	return out
 endfunc
+" }}}
 
 "-------------------------------------------------------------------------------
-" エンコーディング関連 Encoding
+" エンコーディング関連 Encoding {{{
 "-------------------------------------------------------------------------------
 set encoding=utf-8           " デフォルトエンコーディング
 set fileformats=unix,dos,mac " 改行文字
@@ -269,9 +279,10 @@ set fileencodings=utf-8,ucs-bom,euc-jp,iso-2022-jp,cp932,utf-16,utf-16le
 if has('win32')
 	set termencoding = 'Shift-JIS'
 endif
+" }}}
 
 "-------------------------------------------------------------------------------
-" その他 misc
+" その他 misc {{{
 "-------------------------------------------------------------------------------
 " Hack #202: 自動的にディレクトリを作成する
 augroup vimrc-auto-mkdir  " {{{
@@ -284,9 +295,10 @@ augroup vimrc-auto-mkdir  " {{{
     endif
   endfunction  " }}}
 augroup END  " }}}
+" }}}
 
 "-------------------------------------------------------------------------------
-" テンプレートファイルの読み込み
+" テンプレートファイルの読み込み Template {{{
 "-------------------------------------------------------------------------------
 augroup SkeletonAu
 	autocmd!
@@ -305,9 +317,10 @@ augroup SkeletonAu
 	autocmd BufNewFile *.user.coffee 1r $MYVIMRUNTIME/template/skeleton.user.coffee |1 delete _
 	autocmd BufNewFile *.user.js 1r $MYVIMRUNTIME/template/skeleton.user.js |1 delete _
 augroup END
+" }}}
 
 "-------------------------------------------------------------------------------
-" キーマップ Keymap
+" キーマップ Keymap {{{
 "-------------------------------------------------------------------------------
 nnoremap : ;
 nnoremap ; :
@@ -342,8 +355,8 @@ nnoremap * :<C-u>set hlsearch<CR>*
 nnoremap # :<C-u>set hlsearch<CR>#
 
 nnoremap vv <C-v>
-nnoremap -- :<C-u>VimFilerBufferDir<CR>
-nnoremap - :<C-u>e %:h/
+" nnoremap -- :<C-u>VimFilerBufferDir<CR>
+" nnoremap - :<C-u>e %:h/
 nnoremap <C-l> :<C-u>e %<CR>
 
 nnoremap J gJ
@@ -560,38 +573,59 @@ cnoremap <C-h> <Left>
 cnoremap <C-l> <Right>
 cnoremap <expr> /  getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ?  getcmdtype() == '?' ? '\?' : '?'
+" }}}
+
 "-------------------------------------------------------------------------------
-" オプションの切り替え option
+" オプションの切り替え option {{{
 "-------------------------------------------------------------------------------
 " wrap
 nnoremap <Space>ow :<C-u>setlocal wrap! wrap?<CR>
+" }}}
 
 "-------------------------------------------------------------------------------
 " Plugins
 "-------------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------------
-" nathanaelkane/vim-indent-guides
+" glidenote/memolist.vim {{{
+"-------------------------------------------------------------------------------
+let g:memolist_memo_suffix = "markdown"
+let g:memolist_memo_date = "%Y-%m-%d %H:%M"
+let g:memolist_prompt_tags = 1
+let g:memolist_prompt_categories = 1
+let g:memolist_qfixgrep = 1
+let g:memolist_vimfiler = 1
+let g:memolist_path = $HOME.'/Dropbox/Documents/memolist'
+" let g:memolist_template_dir_path = $HOME.'/Dropbox/Documents/memolist'
+
+nnoremap <Space>mm :<C-u>MemoNew<CR>
+nnoremap <Space>ml :<C-u>Unite -buffer-name=memolist file:<C-r>=g:memolist_path<CR><CR>
+" }}}
+
+"-------------------------------------------------------------------------------
+" nathanaelkane/vim-indent-guides {{{
 "-------------------------------------------------------------------------------
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_color_change_percent = 20
 let g:indent_guides_guide_size = 1
+" }}}
 
 "-------------------------------------------------------------------------------
-" scrooloose/syntastic
+" scrooloose/syntastic {{{
 "-------------------------------------------------------------------------------
 " let g:syntastic_mode_map = {'mode': 'active',
-" 			\'active_filetypes': ['javascript'],
-" 			\'passive_filetypes': ['php']
+" " 			\'active_filetypes': ['javascript'],
+"     \'passive_filetypes': ['html']
 " }
-let g:syntastic_auto_jump=1
-let g:syntastic_auto_loc_list=1
+let g:syntastic_auto_jump = 1
+let g:syntastic_auto_loc_list = 1
 " let g:syntastic_javascript_jslint_conf = "--white --undef --nomen --regexp --plusplus --bitwise --newcap --sloppy --vars"
 let g:syntastic_javascript_jslint_conf = "--undef --nomen --regexp --plusplus --bitwise --newcap --sloppy --vars"
+"}}}
+
 "-------------------------------------------------------------------------------
-" tpope/vim-fugitive
+" tpope/vim-fugitive {{{
 "-------------------------------------------------------------------------------
-" for Fugitive {{{
 nnoremap <Space>gd :<C-u>Gdiff<Enter>
 nnoremap <Space>gs :<C-u>Gstatus<Enter>
 nnoremap <Space>gl :<C-u>Glog<Enter>
@@ -600,22 +634,24 @@ nnoremap <Space>gc :<C-u>Gcommit<Enter>
 nnoremap <Space>gC :<C-u>Git commit --amend<Enter>
 nnoremap <Space>gb :<C-u>Gblame<Enter>
 " }}}
-"
+
 "-------------------------------------------------------------------------------
-" h1mesuke/vim-alignta
+" h1mesuke/vim-alignta {{{
 "-------------------------------------------------------------------------------
 xnoremap <silent>A  :Alignta<Space>
 xnoremap <silent>a: :Alignta  01 :<CR>
+" }}}
 
 "-------------------------------------------------------------------------------
-" hallettj/jslint.vim
+" hallettj/jslint.vim {{{
 "-------------------------------------------------------------------------------
 " #13: Vim(echoerr): could not invoke JSLint - Issues - hallettj/jslint.vim - GitHub
 " https://github.com/hallettj/jslint.vim/issues/13
 let $JS_CMD='node'
+" }}}
 
 "-------------------------------------------------------------------------------
-" Shougo/neocomplcache
+" Shougo/neocomplcache {{{
 "-------------------------------------------------------------------------------
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_ignore_case = 1
@@ -673,8 +709,12 @@ let g:neocomplcache_dictionary_filetype_lists = {
 			\'php'        : $MYVIMRUNTIME.'/dict/php.dict'
 			\}
 nnoremap <Leader>es :<C-u>NeoComplCacheEditSnippets<CR>
+"Nesでスニペットを編集
+command! -nargs=* Nes NeoComplCacheEditSnippets
+" }}}
+
 "-------------------------------------------------------------------------------
-" thinca/vim-quickrun
+" thinca/vim-quickrun {{{
 "-------------------------------------------------------------------------------
 let g:quickrun_config = {}
 let g:quickrun_config = {
@@ -691,17 +731,19 @@ augroup END
 let g:quickrun_config['php.phpunit'] = {}
 let g:quickrun_config['php.phpunit']['command'] = 'phpunit'
 let g:quickrun_config['php.phpunit']['exec'] = '%c %o %s'
+" }}}
 
 
 "------------------------------------
-" surround.vim
+" surround.vim {{{
 "------------------------------------
 " s, ssで選択範囲を指定文字でくくる
 nmap s <Plug>Ysurround
 nmap ss <Plug>Yssurround
+" }}}
 
 "-------------------------------------------------------------------------------
-" Shougo/unite.vim
+" Shougo/unite.vim {{{
 "-------------------------------------------------------------------------------
 " 入力モードで開始する
 let g:unite_enable_start_insert = 1
@@ -717,9 +759,10 @@ let g:unite_source_menu_menus.shortcut = {
 			\     'description' : 'Shortcut menu',
 			\ }
 let g:unite_source_menu_menus.shortcut.candidates = {
-			\       'Bundle'    : 'Unite neobundle/install:!',
-			\       'ghci'      : 'VimShellInteractive ghci',
-			\       'python'    : 'VimShellInteractive python',
+			\       'Bundle':     'Unite neobundle/install:!',
+			\       'Font':       'Unite -auto-preview font',
+			\       'ghci':       'VimShellInteractive ghci',
+			\       'python':     'VimShellInteractive python',
 			\       'earthquake': 'VimShellInteractive earthquake',
 			\       'Unite Beautiful Attack' : 'Unite -auto-preview colorscheme',
 			\     }
@@ -734,21 +777,22 @@ endfunction
 call unite#set_buffer_name_option('default', 'ignorecase', 1)
 call unite#set_buffer_name_option('default', 'smartcase', 1)
 
-nnoremap <silent> <Space>ua :<C-u>Unite -buffer-name=files bookmark buffer file_mru directory_mru file<CR>
+nnoremap <silent> <Space>ua :<C-u>Unite -buffer-name=files bookmark buffer file_mru directory_mru file file/new<CR>
 nnoremap <silent> <Space>ub :<C-u>Unite -buffer-name=files buffer<CR>
-nnoremap <silent> <Space>uc :<C-u>Unite -auto-preview colorscheme<Cr>
-" nnoremap <silent> <Space>uf :<C-u>UniteWithCurrentDir -buffer-name=files file<CR>
-nnoremap <silent> <Space>uf :<C-u>UniteWithCurrentDir -buffer-name=files file<CR>
+nnoremap <silent> <Space>uf :<C-u>UniteWithBufferDir -buffer-name=files file file/new<CR>
+nnoremap <silent> <Space>uk :<C-u>Unite -buffer-name=files bookmark file file/new<CR>
+nnoremap <silent> <Space>um :<C-u>Unite -buffer-name=files file_mru directory_mru file file/new<CR>
+nnoremap <silent> <Space>uu :<C-u>Unite -buffer-name=files buffer tab file_mru bookmark file file/new<CR>
+nnoremap <silent> -- :<C-u>UniteWithBufferDir -buffer-name=files file file/new<CR>
+
+nnoremap <silent> <Space>uc :<C-u>Unite -buffer-name=colorscheme -auto-preview colorscheme<Cr>
 nnoremap <silent> <Space>ug :<C-u>Unite -no-quit -auto-preview grep<CR>
 nnoremap <silent> <Space>uh :<C-u>Unite help<CR>
-nnoremap <silent> <Space>uk :<C-u>Unite -buffer-name=files bookmark file<CR>
-nnoremap <silent> <Space>um :<C-u>Unite -buffer-name=files file_mru directory_mru file<CR>
-nnoremap <silent> <Space>uo :<C-u>Unite outline<CR>
+nnoremap <silent> <Space>uo :<C-u>Unite -buffer-name=outline outline<CR>
 nnoremap <silent> <Space>uq :<C-u>Unite -auto-preview qf<CR>
 " nnoremap <silent> <Space>ur :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> <Space>ut :<C-u>Unite tab<CR>
 nnoremap <silent> <Space>us :<C-u>Unite source<CR>
-nnoremap <silent> <Space>uu :<C-u>Unite -buffer-name=files buffer tab file_mru bookmark file<CR>
 nnoremap <silent> <Space>uv :<C-u>Unite vimeshell/history<CR>
 nnoremap <silent> <Space>ll :<C-u>Unite menu:shortcut<CR>
 
@@ -765,9 +809,10 @@ function! s:unite_my_settings()
 	" imap <buffer> jj         <Plug>(unite_insert_leave)
 	imap <buffer> <C-w>      <Plug>(unite_delete_backward_path)
 endfunction
+" }}}
 
 "-------------------------------------------------------------------------------
-" Shougo/vimfiler
+" Shougo/vimfiler {{{
 "-------------------------------------------------------------------------------
 call vimfiler#set_execute_file('vim', 'vim')
 let g:vimfiler_safe_mode_by_default=0
@@ -791,9 +836,10 @@ autocmd FileType vimfiler call s:vimfiler_my_settings()
 function! s:vimfiler_my_settings()
 	setlocal nonumber
 endfunction
+" }}}
 
 "-------------------------------------------------------------------------------
-" smartchr.vim
+" smartchr.vim {{{
 "-------------------------------------------------------------------------------
 "inoremap <expr> _ smartchr#one_of('_', '->', '__')
 
@@ -840,22 +886,24 @@ inoremap <expr> " search('^#include\%#', 'bcn')? ' "': '"'
 " inoremap <expr> () search('\<\if\%#', 'bcn')? ' ()': '()'
 " inoremap <expr> () search('\<\while\%#', 'bcn')? ' ()': '()'
 " inoremap <expr> () search('\<\for\%#', 'bcn')? ' ()': '()'
+"}}}
 
 "-------------------------------------------------------------------------------
-" thinca/vim-ref
+" thinca/vim-ref {{{
 "-------------------------------------------------------------------------------
-nnoremap <silent><Space>ra :<C-u>Ref alc<Space>
+" nnoremap <silent><Space>ra :<C-u>Ref alc<Space>
 nnoremap <silent><Space>rp :<C-u>Unite ref/phpmanual<CR>
 " nnoremap <silent> <Space>rl :<C-u>Unite ref/perldoc<CR>
 nnoremap <silent><Space>rj :<C-u>Unite ref/jquery<CR>
 nnoremap <silent><Space>rr :<C-u>Unite ref/refe<CR>
 
-let g:ref_alc_start_linenumber = 41
+" let g:ref_alc_start_linenumber = 41
 let g:ref_phpmanual_path = $HOME.'/Dropbox/Documents/References/php_manual_ja/php-chunked-xhtml/'
 let g:ref_jquery_path = $HOME.'/Dropbox/Documents/References/jqapi-latest/docs'
+" }}}
 
 "-------------------------------------------------------------------------------
-" Shougo/vimshell
+" Shougo/vimshell {{{
 "-------------------------------------------------------------------------------
 nnoremap <silent> <Space>sh : <C-u>VimShell<CR>
 
@@ -877,6 +925,7 @@ let g:vimshell_ignore_case = 1
 " \'#3c3c3c', '#ff6666', '#66ff66', '#ffd30a', '#1e95fd', '#ff13ff', '#1bc8c8', '#C0C0C0',
 " \'#686868', '#ff6666', '#66ff66', '#ffd30a', '#6699ff', '#f820ff', '#4ae2e2', '#ffffff'
 " \]
+"}}}
 
 "-------------------------------------------------------------------------------
 " tyru/restert
@@ -925,7 +974,7 @@ vmap <Space>cc <Plug>(caw:I:toggle)
 " vnoremap <Leader>T :<C-u>Tabularize /
 
 "-------------------------------------------------------------------------------
-" mattn/zencoding.vim
+" mattn/zencoding.vim {{{
 "-------------------------------------------------------------------------------
 " 入力補完を有効にする
 let g:use_zen_complete_tag = 1
@@ -962,29 +1011,33 @@ let g:user_zen_settings = {
 \		'filters': 'html,c',
 \	},
 \}
+"}}}
 
-"===============================================================================
-" Lokaltog/vim-powerline
-"===============================================================================
+"-------------------------------------------------------------------------------
+" Lokaltog/vim-powerline {{{
+"-------------------------------------------------------------------------------
 let g:Powerline_symbols = 'fancy'
+" }}}
 
-"===============================================================================
-" veloce/vim-aldmeris
-"===============================================================================
+"-------------------------------------------------------------------------------
+" veloce/vim-aldmeris {{{
+"-------------------------------------------------------------------------------
 " let g:aldmeris_termcolors = "tango"
 " let g:aldmeris_transparent = 1
+"}}}
 
-"===============================================================================
-" teramako/jscomplete-vim
-"===============================================================================
+"-------------------------------------------------------------------------------
+" teramako/jscomplete-vim {{{
+"-------------------------------------------------------------------------------
 autocmd FileType javascript
   \ :setl omnifunc=jscomplete#CompleteJS
 let g:jscomplete_use = ['dom', 'moz']
 " => autoload/js/dom.vim と autoload/js/moz.vim が読まれる
+"}}}
 
-"===============================================================================
+"-------------------------------------------------------------------------------
 " test
-"===============================================================================
+"-------------------------------------------------------------------------------
 augroup taskpaper
 	autocmd! BufRead,BufNewFile *.taskpaper   setfiletype taskpaper
 	autocmd FileType taskpaper setlocal shiftwidth=2 tabstop=2 softtabstop=2
@@ -1004,9 +1057,9 @@ autocmd FileType qf setlocal wrap
 autocmd FileType coffee setlocal expandtab
 
 "
-"===============================================================================
+"-------------------------------------------------------------------------------
 " after/ftplugin
-"===============================================================================
+"-------------------------------------------------------------------------------
 " c.vim
 " java.vim
 " perl.vim
@@ -1047,3 +1100,14 @@ augroup END
 augroup markdown
 	autocmd BufNewFile,BufRead *.md set filetype=markdown
 augroup END
+
+augroup ruby
+	autocmd FileType php setlocal expandtab
+augroup END
+
+" autocmd BufRead * call Backup()
+" function! Backup()
+"   echo expand("%:p")
+"   echo expand('%:r')
+"   echo expand('%:e')
+" endfunction
