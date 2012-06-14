@@ -1,3 +1,8 @@
-.vim/bundle/**/*
-.vim/colors/**/*
+.vim/bundle
+.vim/colors
 .vim/.netrwhist
+bin
+skk
+skk-dic
+.js
+.skk
