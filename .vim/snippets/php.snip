@@ -308,3 +308,11 @@ snippet headeru
 
 snippet hr
   echo '<hr />';
+
+snippet obs
+  ob_end_flush();
+  ob_start('mb_output_handler');
+
+snippet obf
+  ob_flush();
+  flush();
