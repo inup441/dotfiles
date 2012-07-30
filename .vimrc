@@ -896,7 +896,25 @@ nnoremap <silent><Space>rp :<C-u>Unite ref/phpmanual<CR>
 " nnoremap <silent> <Space>rl :<C-u>Unite ref/perldoc<CR>
 nnoremap <silent><Space>rj :<C-u>Unite ref/jquery<CR>
 nnoremap <silent><Space>rr :<C-u>Unite ref/refe<CR>
-
+let g:ref_source_webdict_sites = {
+\   'alc': {
+\     'url': 'http://eow.alc.co.jp/%s',
+\     'keyword_encoding': 'utf-8',
+\     'cache': 1,
+\   },
+\   'weblio': {
+\     'url': 'http://ejje.weblio.jp/content/%s',
+\     'keyword_encoding': 'utf-8',
+\     'cache': 1,
+\   },
+\ }
+let g:ref_source_webdict_sites.default = 'alc'
+function! g:ref_source_webdict_sites.alc.filter(output)
+  return join(split(a:output, "\n")[29 :], "\n")
+endfunction
+function! g:ref_source_webdict_sites.weblio.filter(output)
+  return join(split(a:output, "\n")[53 :], "\n")
+endfunction
 " let g:ref_alc_start_linenumber = 41
 let g:ref_phpmanual_path = $HOME.'/Dropbox/Documents/References/php_manual_ja/php-chunked-xhtml/'
 let g:ref_jquery_path = $HOME.'/Dropbox/Documents/References/jqapi-latest/docs'
