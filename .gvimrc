@@ -31,19 +31,6 @@ endif
 highlight Notes cterm=underline ctermfg=lightblue guibg=DarkMagenta
 autocmd BufNewFile,BufRead * match Notes /NOTE:/
 
-" Additional highlights
-augroup AdditionalHighlights
-  autocmd!
-
-  " Trailing spaces
-  autocmd ColorScheme * highlight link TrailingSpaces Error
-  autocmd Syntax * syntax match TrailingSpaces containedin=ALL /\s\+$/
-
-  " Zenkaku space
-  autocmd ColorScheme * highlight link ZenkakuSpace Error
-  autocmd Syntax * syntax match ZenkakuSpace containedin=ALL /　/
-augroup END
-
 if has('gui_macvim')
 	nnoremap <Space>fu :<C-u>setlocal fu! fu?<CR>
 	set antialias
