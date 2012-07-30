@@ -717,9 +717,9 @@ command! -nargs=* Nes NeoComplCacheEditSnippets
 " thinca/vim-quickrun {{{
 "-------------------------------------------------------------------------------
 let g:quickrun_config = {}
-let g:quickrun_config = {
-			\'*': {'runner': 'vimproc:100'},
-			\}
+" let g:quickrun_config = {
+" 			\'*': {'runner': 'vimproc:100'},
+" 			\}
 let g:quickrun_config.javascript = {'command': 'node', 'exec': ['%c %s']}
 " 
 augroup QuickRunPHPUnit

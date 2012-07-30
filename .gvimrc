@@ -71,11 +71,11 @@ if has('gui_macvim')
 
 	" Vim-users.jp - Hack #234: Vim外にいるときはVimを透けさせる
 	" http://vim-users.jp/2011/10/hack234/
-	augroup hack234
-		autocmd!
-		autocmd VimEnter,FocusGained * set transparency=10
-		autocmd FocusLost * set transparency=50
-	augroup END
+" 	augroup hack234
+" 		autocmd!
+" 		autocmd VimEnter,FocusGained * set transparency=10
+" 		autocmd FocusLost * set transparency=50
+" 	augroup END
 elseif has('win32') || has('win64')
 	set linespace=3       " 行間の幅のピクセル数
 	set columns=88
