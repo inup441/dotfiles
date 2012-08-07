@@ -288,6 +288,9 @@ snippet errorn
   error_reporting(E_ALL ^ E_NOTICE);
   ini_set('display_errors', '1');
 
+snippet error_log
+  ini_set('error_log', dirname(__FILE__) . '/log');
+
 snippet pre
   echo '<pre>';
   ${0}
