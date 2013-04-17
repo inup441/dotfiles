@@ -1,7 +1,7 @@
 scriptencoding utf-8
 " colorscheme yuroyoro256
-colorscheme aldmeris
-autocmd ColorScheme * highlight SpecialKey term=underline ctermfg=Gray guifg=Gray
+colorscheme base16-chalk
+" autocmd ColorScheme * highlight SpecialKey term=underline ctermfg=Gray guifg=Gray
 
 set number             " 行番号表示
 set go-=m  go-=T       " ツールバー、メニューを非表示
@@ -14,22 +14,22 @@ set noerrorbells      " エラー時の音の抑制
 set novisualbell      " エラー時のビジュアルベルの抑制
 set visualbell t_vb=
 set cmdheight=1       " コマンドラインの高さ (gvimはgvimrcで指定)
-set cursorcolumn      " カーソル位置縦ライン表示
+" set cursorcolumn      " カーソル位置縦ライン表示
 set clipboard=unnamed " クリップボードをWindowsと連携
 set laststatus=2      " ステータスラインを常に表示
-set linespace=4       " 行間の幅のピクセル数
-set scrolloff=1000000 " スクロール時の余白確保
+set linespace=2       " 行間の幅のピクセル数
+set scrolloff=999     " スクロール時の余白確保
 set showtabline=2     " タブを常に表示
 
 " 全角スペースの表示
-highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
-if has('win32') && !has('gui_running')
-	autocmd BufNewFile,BufRead * match ZenkakuSpace /\%u8140/
-else
-	autocmd BufNewFile,BufRead * match ZenkakuSpace /　/
-endif
-highlight Notes cterm=underline ctermfg=lightblue guibg=DarkMagenta
-autocmd BufNewFile,BufRead * match Notes /NOTE:/
+" highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
+" if has('win32') && !has('gui_running')
+" 	autocmd BufNewFile,BufRead * match ZenkakuSpace /\%u8140/
+" else
+" 	autocmd BufNewFile,BufRead * match ZenkakuSpace /　/
+" endif
+" highlight Notes cterm=underline ctermfg=lightblue guibg=DarkMagenta
+" autocmd BufNewFile,BufRead * match Notes /NOTE:/
 
 if has('gui_macvim')
 	nnoremap <Space>fu :<C-u>setlocal fu! fu?<CR>
@@ -44,25 +44,26 @@ if has('gui_macvim')
 	" set guifont=Andale_Mono:h16
 " 	set guifont=Consolas:h14
 " 	set guifont=Consolas\ for\ Powerline:h14
-	set guifont=Menlo\ for\ Powerline:h14
+" 	set guifont=Menlo\ for\ Powerline:h14
 	" set guifont=DroidSansMonoSlashed:h12
 " 	set guifont=Envy\ Code\ R\ for\ Powerline:h14
 	" set guifont=Inconsolata:h14
 	" set guifont=Menlo_bold:h13
 	" set guifont=MigMix_2m_bold:h13
 	" set guifont=Ricty-Regular:h15
+ 	set guifont=Source\ Code\ Pro\ for\ Powerline:h13
 
 	" set guifontwide=meiryoKeConsole
-	set guifontwide=Ricty-Regular:h14
+ 	set guifontwide=Ricty-Regular:h13
 	" set guifontwide=TakaoExGothic:h12
 
-	" Vim-users.jp - Hack #234: Vim外にいるときはVimを透けさせる
-	" http://vim-users.jp/2011/10/hack234/
-" 	augroup hack234
-" 		autocmd!
-" 		autocmd VimEnter,FocusGained * set transparency=10
-" 		autocmd FocusLost * set transparency=50
-" 	augroup END
+" Vim-users.jp - Hack #234: Vim外にいるときはVimを透けさせる
+" http://vim-users.jp/2011/10/hack234/
+	augroup hack234
+		autocmd!
+		autocmd VimEnter,FocusGained * set transparency=10
+		autocmd FocusLost * set transparency=25
+	augroup END
 elseif has('win32') || has('win64')
 	set linespace=3       " 行間の幅のピクセル数
 	set columns=88

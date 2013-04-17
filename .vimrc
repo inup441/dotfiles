@@ -9,6 +9,10 @@ elseif isdirectory($HOME . '\vimfiles')
 elseif isdirectory($VIM . '\vimfiles')
 	let $MYVIMRUNTIME = $VIM.'\vimfiles'
 endif
+
+if has('win32')
+	let $DROPBOX = $HOME . '\Dropbox'
+endif
 " }}}
 
 "--------------------------------------------------------------------------------
@@ -41,7 +45,7 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'othree/eregex.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/neocomplcache-snippets-complete'
+NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/vimproc', {
@@ -70,6 +74,7 @@ NeoBundle 'h1mesuke/unite-outline'
 " language
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'mattn/zencoding-vim'
+NeoBundle 'msanders/cocoa.vim', {'type' : 'nosync', 'base' : '~/.vim/bundle'}
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'davidoc/taskpaper.vim'
 " NeoBundle 'hallettj/jslint.vim'
@@ -85,12 +90,21 @@ NeoBundle 'vim-scripts/smarty.vim'
 
 " ColorScheme {{{
 NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'chmllr/vim-colorscheme-elrodeo'
+NeoBundle 'chriskempson/base16-vim'
 " NeoBundle 'ChrisKempson/Vim-Tomorrow-Theme'
+NeoBundle 'effkay/argonaut.vim'
 NeoBundle 'gmarik/ingretu'
+NeoBundle 'jelera/vim-gummybears-colorscheme'
+NeoBundle 'nanotech/jellybeans.vim'
+NeoBundle 'nelstrom/vim-mac-classic-theme'
+NeoBundle 'nielsmadan/harlequin'
 NeoBundle 'noahfrederick/Hemisu'
+NeoBundle 'uu59/vim-herokudoc-theme'
 NeoBundle 'veloce/vim-aldmeris'
+NeoBundle 'vim-scripts/neverland.vim--All-colorschemes-suck'
 NeoBundle 'yuroyoro/yuroyoro256.vim'
-NeoBundle 'git://gist.github.com/187578.git'
+NeoBundle 'git://gist.github.com/187578.git' " gvim color scheme: h2u_black, h2u_dark and h2u_white.
 " }}}
 
 " Syntax
@@ -614,7 +628,7 @@ nnoremap <Space>ml :<C-u>Unite -buffer-name=memolist file:<C-r>=g:memolist_path<
 "-------------------------------------------------------------------------------
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_color_change_percent = 20
-let g:indent_guides_guide_size = 1
+let g:indent_guides_guide_size = 2
 " }}}
 
 "-------------------------------------------------------------------------------
@@ -624,10 +638,10 @@ let g:indent_guides_guide_size = 1
 " " 			\'active_filetypes': ['javascript'],
 "     \'passive_filetypes': ['html']
 " }
-let g:syntastic_auto_jump = 1
-let g:syntastic_auto_loc_list = 1
+" let g:syntastic_auto_jump = 1
+" let g:syntastic_auto_loc_list = 1
 " let g:syntastic_javascript_jslint_conf = "--white --undef --nomen --regexp --plusplus --bitwise --newcap --sloppy --vars"
-let g:syntastic_javascript_jslint_conf = "--undef --nomen --regexp --plusplus --bitwise --newcap --sloppy --vars"
+" let g:syntastic_javascript_jslint_conf = "--undef --nomen --regexp --plusplus --bitwise --newcap --sloppy --vars"
 "}}}
 
 "-------------------------------------------------------------------------------
@@ -645,8 +659,9 @@ nnoremap <Space>gb :<C-u>Gblame<Enter>
 "-------------------------------------------------------------------------------
 " h1mesuke/vim-alignta {{{
 "-------------------------------------------------------------------------------
-xnoremap <silent>A  :Alignta<Space>
-xnoremap <silent>a: :Alignta  01 :<CR>
+vnoremap <silent> => :Align @1 =><CR>
+vnoremap <silent> = :Align @1 =<CR>
+vnoremap <silent> == =
 " }}}
 
 "-------------------------------------------------------------------------------
@@ -822,28 +837,55 @@ endfunction
 " Shougo/vimfiler {{{
 "-------------------------------------------------------------------------------
 call vimfiler#set_execute_file('vim', 'vim')
-let g:vimfiler_safe_mode_by_default=0
+call vimfiler#set_execute_file('_', 'vim')
 let g:vimfiler_as_default_explorer=1
+let g:vimfiler_directory_display_top=1
+let g:vimfiler_edit_action="vsplit"
+let g:vimfiler_enable_auto_cd=1
+let g:vimfiler_safe_mode_by_default=0
 let g:vimfiler_sort_type='extension'
 
 " Like Textmate icons.
+let g:vimfiler_file_icon = '-'
 let g:vimfiler_tree_leaf_icon = ' '
 let g:vimfiler_tree_opened_icon = '▾'
 let g:vimfiler_tree_closed_icon = '▸'
-let g:vimfiler_file_icon = '-'
 let g:vimfiler_marked_file_icon = '*'
 
 " nnoremap <Space>vf :<C-u>VimFilerDouble<CR>
-nnoremap <Space>vf :<C-u>VimFiler<CR>
+nnoremap <Space>vf :<C-u>VimFilerBufferDir<CR>
 nnoremap <Space>ff :<C-u>VimFiler -buffer-name=explorer -split -simple -winwidth=35 -toggle<CR>
 " nnoremap <C-e> :<C-u>VimFiler<CR>
 " inoremap <C-e> :<C-u>VimFiler<CR>
 
 autocmd FileType vimfiler call s:vimfiler_my_settings()
 function! s:vimfiler_my_settings()
+" 	nnoremap <buffer><silent>/ :<C-u>Unite file -default-action=vimfiler<CR>
 	setlocal nonumber
 endfunction
 " }}}
+
+nnoremap <F2> :VimFiler -buffer-name=explorer -split -winwidth=45 -toggle -no-quit<Cr>
+autocmd! FileType vimfiler call g:my_vimfiler_settings()
+function! g:my_vimfiler_settings()
+  nmap     <buffer><expr><Cr> vimfiler#smart_cursor_map("\<Plug>(vimfiler_expand_tree)", "\<Plug>(vimfiler_edit_file)")
+  nnoremap <buffer>s          :call vimfiler#mappings#do_action('my_split')<Cr>
+  nnoremap <buffer>v          :call vimfiler#mappings#do_action('my_vsplit')<Cr>
+endfunction
+
+let s:my_action = { 'is_selectable' : 1 }
+function! s:my_action.func(candidates)
+  wincmd p
+  exec 'split '. a:candidates[0].action__path
+endfunction
+call unite#custom_action('file', 'my_split', s:my_action)
+
+let s:my_action = { 'is_selectable' : 1 }                     
+function! s:my_action.func(candidates)
+  wincmd p
+  exec 'vsplit '. a:candidates[0].action__path
+endfunction
+call unite#custom_action('file', 'my_vsplit', s:my_action)
 
 "-------------------------------------------------------------------------------
 " smartchr.vim {{{
@@ -883,7 +925,7 @@ inoremap <expr> ; smartchr#one_of(';', ';<cr>')
 " 「->」は入力しづらいので、..で置換え
 inoremap <expr> . smartchr#loop('.', '->', '..', '...')
 " 行先頭での@入力で、プリプロセス命令文を入力
-inoremap <expr> @ search('^\(#.\+\)\?\%#','bcn')? smartchr#one_of('#define', '#include', '#ifdef', '#endif', '@'): '@'
+" inoremap <expr> @ search('^\(#.\+\)\?\%#','bcn')? smartchr#one_of('#define', '#include', '#ifdef', '#endif', '@'): '@'
 
 inoremap <expr> " search('^#include\%#', 'bcn')? ' "': '"'
 " if文直後の(は自動で間に空白を入れる
@@ -1007,11 +1049,13 @@ let g:user_zen_settings = {
 \	'lang': 'ja',
 \	'html': {
 \		'snippets': {
-\			'jq': '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>',
-\			'jq7': '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js" type="text/javascript"></script>',
-\			'jq6': '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>',
-\			'jq5': '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript"></script>',
-\			'coffee': '<script src="http://jashkenas.github.com/coffee-script/extras/coffee-script.js" type="text/javascript"></script>',
+\			'jq': '<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>',
+\			'jq9': '<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>',
+\			'jq8': '<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>',
+\			'jq7': '<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>',
+\			'jq6': '<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>',
+\			'jq5': '<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>',
+\			'coffee': '<script type="text/javascript" src="http://jashkenas.github.com/coffee-script/extras/coffee-script.js" type="text/javascript"></script>',
 \			'meta:script': '<meta http-equiv="Content-Script-Type" content="text/javascript" />',
 \			'meta:norobots': '<meta name="robots" content="noindex, nofollow, noarchive" />'
 \		},
@@ -1042,6 +1086,15 @@ let g:user_zen_settings = {
 " Lokaltog/vim-powerline {{{
 "-------------------------------------------------------------------------------
 let g:Powerline_symbols = 'fancy'
+let g:Powerline_theme       ='solarized256'
+let g:Powerline_colorscheme ='solarized256'
+
+let s:prev_seg = 'paste_indicator'
+for seg in ['fileformat', 'fileencoding', 'filetype', 'lineinfo']
+  call Pl#Theme#InsertSegment(seg, 'after', s:prev_seg)
+  let s:prev_seg = seg
+endfor
+unlet s:prev_seg
 " }}}
 
 "-------------------------------------------------------------------------------
@@ -1136,3 +1189,23 @@ augroup END
 "   echo expand('%:r')
 "   echo expand('%:e')
 " endfunction
+
+" autocmd CursorMovedI * :call vimproc#system_bg($HOME . "/bin/vim-key-sound.rb '" . getline('.')[col('.') - 2] . "'")
+
+"-------------------------------------------------------------------------------
+nmap : <sid>(command-line-enter)
+xmap : <sid>(command-line-enter)
+
+autocmd CmdwinEnter * call s:init_cmdwin()
+function! s:init_cmdwin()
+  nnoremap <buffer> q :<C-u>quit<CR>
+  nnoremap <buffer> <TAB> :<C-u>quit<CR>
+  inoremap <buffer><expr><CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
+  inoremap <buffer><expr><C-h> pumvisible() ? "\<C-y>\<C-h>" : "\<C-h>"
+  inoremap <buffer><expr><BS> pumvisible() ? "\<C-y>\<C-h>" : "\<C-h>"
+
+  " Completion.
+  inoremap <buffer><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+  startinsert!
+endfunction
