@@ -3,6 +3,7 @@ export PATH=$PATH:/usr/local/share/aclocal
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/.cabal/bin
 export PATH=$PATH:~/Developer/android-sdk-macosx/tools
+export EDITOR=vim
 export JSTESTDRIVER_HOME=~/bin
 
 NODE_PATH=/usr/local/lib/node_modules
@@ -13,4 +14,3 @@ eval "$(rbenv init -)"
 
 export LANG=ja_JP.UTF-8
 # export LANG=en_US.UTF-8
-

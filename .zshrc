@@ -52,6 +52,7 @@ setopt mark_dirs            # ファイル名の展開でディレクトリに�
 setopt magic_equal_subst    # --prefix=/usr などの = 以降も補完
 setopt noautoremoveslash    # 最後のスラッシュを自動的に削除しない
 setopt nobeep               # ビープを鳴らさない
+setopt nonomatch
 setopt no_flow_control      # フローコントロールを無効にする
 setopt numeric_glob_sort    # ファイル名の展開で辞書順ではなく数値的にソート
 setopt print_eight_bit      # 日本語ファイル名を表示可能にする
