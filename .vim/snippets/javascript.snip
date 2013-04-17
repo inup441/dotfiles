@@ -31,9 +31,11 @@ snippet for
 	};
 
 snippet forin
-	for (var ${2:i} in ${1:Things}) {
-		${0}
-	};
+  for (var ${2:name} in ${1:object}) {
+    if (object.hasOwnProperty(name)) {
+      ${0}
+    }
+  };
 
 snippet ;,
     ${1:value_name}:${0:value},
@@ -48,13 +50,47 @@ snippet timeout
 
 snippet ajax
     $.ajax({
-      url: ${1},
-      type: ${2},
+      url: '${1}',
+      type: '${2}',
       data: ${3},
-      dataType: ${4},
+      dataType: '${4}',
       success: function() {
         ${0}
       },
       error: function() {
       }
     });
+
+snippet     fu
+abbr        anonymous
+  function ${0}() {
+    ${1}
+  }
+
+snippet     jq
+abbr        $(function(){});
+  $(function(){
+    ${0}
+  });
+
+snippet     fn
+abbr        anonymous
+  (function(){
+    ${0}
+  }());
+
+snippet     log
+abbr        console.log(arg)
+  console.log(${1:#arg});
+
+snippet     llog
+abbr        console.log(label + arg)
+  console.log('${1:#label}: ' + {2:#arg});
+
+snippet     default
+  var ${1} = ${1} === undefined ? ${2} : ${3};
+
+snippet     on
+  on('${1}', '${2}', function(){
+    ${0}
+  });
